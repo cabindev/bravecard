@@ -21,15 +21,16 @@ const config: Config = {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-10px)' },
         },
-        spinSlow: {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(360deg)' },
+        breathe: {
+          '0%, 100%': { transform: 'scale(0.98)', opacity: '0.5' },
+          '50%': { transform: 'scale(1.02)', opacity: '1' },
         }
       },
       animation: {
         float: 'float 3s ease-in-out infinite',
-        'spin-slow': 'spinSlow 3s linear infinite',
-      }
+        breathe: 'breathe 3s ease-in-out infinite',
+      },
+     
     },
   },
   plugins: [],

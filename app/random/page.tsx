@@ -5,13 +5,15 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { register } from 'swiper/element/bundle'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import { FaArrowLeft } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
 import cardData from '../data/cardData'
 import 'swiper/css'
 import 'swiper/css/effect-coverflow'
 import 'swiper/css/pagination'
-import CloudLoading from '@/components/CloudLoading'
+import BraveLoading from '@/components/BraveLoading'
+
 
 register();
 
@@ -115,7 +117,7 @@ export default function RandomPage() {
       localStorage.setItem('selectedCard', JSON.stringify(selectedCard));
       setIsExiting(true);
       setTimeout(() => {
-        router.push(`/cloudloading?card=${cardId}`);
+        router.push(`/braveLoading?card=${cardId}`);
       }, 500);
     }
   };
@@ -127,21 +129,21 @@ export default function RandomPage() {
     }, 500);
   };
 
-  if (isLoading) return <CloudLoading />;
+  if (isLoading) return <BraveLoading />;
 
   return (
     <AnimatePresence mode="wait">
       {!isExiting && (
-        <motion.div 
+        <motion.div
           key="random-page"
-          initial={{ opacity: 0, scale: 0.9 }} 
-          animate={{ opacity: 1, scale: 1 }} 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.5 }}
           className="w-full min-h-screen bg-gradient-to-r from-pink-100 via-yellow-100 to-blue-100"
         >
           <div className="w-full font-serif px-4 py-8 md:py-12">
-            <motion.h1 
+            <motion.h1
               initial={{ y: -50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
@@ -149,7 +151,7 @@ export default function RandomPage() {
             >
               อธิษฐาน
             </motion.h1>
-            <motion.p 
+            <motion.p
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.5 }}
@@ -162,7 +164,11 @@ export default function RandomPage() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.5 }}
             >
-              <swiper-container ref={swiperElRef} init="false" className="w-full py-3">
+              <swiper-container
+                ref={swiperElRef}
+                init="false"
+                className="w-full py-3 max-w-4xl mx-auto"
+              >
                 {cards.map((card) => (
                   <swiper-slide key={card.id} className="swiper-slide">
                     <div
@@ -178,8 +184,13 @@ export default function RandomPage() {
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 hover:opacity-100 bg-black bg-opacity-50">
                         <div className="text-center">
                           <div className="bg-black bg-opacity-70 text-white py-2 px-4 rounded-full flex items-center space-x-2 mb-2">
-                            <FontAwesomeIcon icon={faCheck} className="text-xl" />
-                            <span className="text-lg font-bold">เลือกใบนี้</span>
+                            <FontAwesomeIcon
+                              icon={faCheck}
+                              className="text-xl"
+                            />
+                            <span className="text-lg font-bold">
+                              เลือกใบนี้
+                            </span>
                           </div>
                           <div className="w-24 h-2 bg-gradient-to-r from-pink-500 via-yellow-500 to-blue-500 rounded-full mx-auto mt-2"></div>
                         </div>
@@ -189,7 +200,7 @@ export default function RandomPage() {
                 ))}
               </swiper-container>
             </motion.div>
-            <motion.div 
+            <motion.div
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.5 }}
@@ -198,18 +209,18 @@ export default function RandomPage() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="py-3 px-6 rounded-full inline-flex items-center transition duration-300"
+                className="
+                 inline-flex items-center justify-center
+                  bg-gradient-to-r from-orange-400 to-pink-400 
+                  text-white w-48 h-14 rounded-full 
+                  text-xl shadow-lg 
+                  hover:from-orange-500 hover:to-pink-500 
+                  transition duration-300
+  "
                 onClick={handleGoBack}
               >
-                <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
-                <span className="
-              inline-flex items-center justify-center
-              bg-gradient-to-r from-orange-400 to-pink-400 
-              text-white w-40 h-14 rounded-full 
-              text-xl shadow-lg 
-              hover:from-orange-500 hover:to-pink-500 
-              transition duration-300
-            ">กลับหน้าแรก</span>
+                <FaArrowLeft className="mr-2 text-lg" />
+                <span>กลับหน้าแรก</span>
               </motion.button>
             </motion.div>
           </div>

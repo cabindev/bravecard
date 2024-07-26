@@ -1,8 +1,8 @@
 'use client'
-
 import { useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import CloudLoading from '@/components/CloudLoading'
+import { motion } from 'framer-motion'
+import BraveLoading from '@/components/BraveLoading'
 
 export default function LoadingPage() {
   const router = useRouter()
@@ -17,18 +17,18 @@ export default function LoadingPage() {
         router.push('/')
       }
     }, 3000)
-
     return () => clearTimeout(timer)
   }, [router, cardId])
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-pink-100 via-yellow-100 to-blue-100 flex flex-col items-center justify-center">
-      <CloudLoading />
-      <div className="text-center mt-8">
-        <div className="text-gray-700 loading-dots font-serif text-xl md:text-3xl">
-          <p>ไพ่รุ้งของคุณคือ<span>...</span></p>
-        </div>
-      </div>
-    </div>
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="fixed inset-0 bg-gradient-to-r from-pink-100 via-yellow-100 to-blue-100 flex items-center justify-center"
+    >
+      <BraveLoading />
+    </motion.div>
   )
 }

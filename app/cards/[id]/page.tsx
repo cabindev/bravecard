@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowCircleDown, faInfoCircle, faRedoAlt } from '@fortawesome/free-solid-svg-icons'
-import CloudLoading from '@/components/CloudLoading'
 import cardData from '@/app/data/cardData'
 import { motion, AnimatePresence } from 'framer-motion'
+import BraveLoading from '@/components/BraveLoading'
 
 type Card = {
   id: number
@@ -72,7 +72,7 @@ export default function CardPage({ params }: { params: { id: string } }) {
     tap: { scale: 0.95 }
   };
 
-  if (isLoading) return <CloudLoading />
+  if (isLoading) return <BraveLoading />
 
   if (error) {
     return (
